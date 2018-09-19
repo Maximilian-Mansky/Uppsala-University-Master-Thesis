@@ -1,0 +1,35 @@
+\usepackage{fontspec,xltxtra,xunicode}
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont[Mapping=tex-text]{Hoefler Text}
+\usetikzlibrary{datavisualization}
+\pgfdeclaredataformat{commentcountdata}%
+    {}{}{#1, #2, #3}
+    {%
+    \pgfkeys{/data point/.cd,count=#1, y=#2, set=sportsmole} \pgfdatapoint
+    \pgfkeys{/data point/.cd,count=#1, y=#3, set=goal} \pgfdatapoint
+    }{}{}%
+
+
+ \pgfdeclaredataformat{statformat}%
+   {}{}{#1, #2, #3, #4}
+   {%
+   \pgfkeys{/data point/.cd, bin=#1, value=#2, set=measured data} \pgfdatapoint
+   \pgfkeys{/data point/.cd, bin=#1, value=#3, set=normal distribution} \pgfdatapoint
+   \pgfkeys{/data point/.cd, bin=#1, value=#4, set=special distribution} \pgfdatapoint
+   }{}{}%
+
+
+\pgfdeclaredataformat{detailcount}%
+    {}{}{#1, #2, #3, #4}
+    {%
+    \pgfkeys{/data point/.cd, count=#1, y=#2, set=sportsmole} \pgfdatapoint
+    \pgfkeys{/data point/.cd, count=#1, y=#3, set=goal human} \pgfdatapoint
+    \pgfkeys{/data point/.cd, count=#1, y=#4, set=goal machine} \pgfdatapoint
+    }{}{}%
+
+\definecolor{goal_blue}{RGB}{0, 100, 163}
+\definecolor{sportsmole_green}{RGB}{69, 125, 20}
+\definecolor{specialorange}{RGB}{179,114, 39}
+\definecolor{goal_machine}{RGB}{20, 51, 100}
+
+\pgfdvdeclarestylesheet{football commentary}{default style/.style={black}}

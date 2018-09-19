@@ -1,0 +1,19 @@
+\documentclass[tikz]{standalone}
+\input{drawing_definitions.tex}
+\begin{document}
+\begin{tikzpicture}
+\datavisualization[scientific axes={width=10cm},
+x axis={attribute=count, label={Comment length}},
+y axis = {attribute = y, label={Relative frequency}},
+visualize as line/.list={sportsmole, goal human, goal machine},
+style sheet = football commentary,
+sportsmole={style={sportsmole_green},label in legend={text={sportsmole commentary}}},
+goal human={style={goal_blue}, label in legend={text={goal.com human written}}},
+goal machine={style={goal_machine}, label in legend={text={goal.com machine written}}},
+legend=north east inside]
+data[read from file=comment_length_detail.csv, format=detailcount];
+%info{
+%	\draw[sportsmole_green, <-, semithick] (visualization cs: count=38.172, y=0)--++(visualization cs: count=0, y=-0.003);
+%	\draw[goal_blue, <-, semithick] (visualization cs: count=21.061, y=0)--++(visualization cs: count=0, y=-0.003);};
+\end{tikzpicture}
+\end{document}

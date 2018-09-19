@@ -1,0 +1,38 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{fontspec,xltxtra,xunicode}
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont[Mapping=tex-text]{Hoefler Text}
+
+\usetikzlibrary{datavisualization}
+\pgfdeclaredataformat{commentcountdata}%
+    {}{}{#1, #2, #3}
+    {%
+    \pgfkeys{/data point/.cd,count=#1, y=#2, set=sportsmole} \pgfdatapoint
+    \pgfkeys{/data point/.cd,count=#1, y=#3, set=goal} \pgfdatapoint
+    }{}{}%
+
+\definecolor{goal_blue}{RGB}{0, 100, 163}
+\definecolor{sportsmole_green}{RGB}{69, 125, 20}
+
+\pgfdvdeclarestylesheet{football commentary}{
+  1/.style={black},
+  2/.style={black},
+  3/.style={black},
+}
+\begin{document}
+\begin{tikzpicture}
+\datavisualization[scientific axes={width=10cm},
+x axis={attribute=count, label={Comment length}},
+y axis = {attribute = y, label={Relative frequency}},
+visualize as line/.list={goal, sportsmole},
+style sheet = football commentary,
+sportsmole={style={sportsmole_green},label in legend={text={sportsmole commentary}}},
+goal={style={goal_blue}, label in legend={text={goal.com commentary}}},
+legend=north east inside]
+data[read from file=comment_counts.csv, format=commentcountdata]
+info{
+	\draw[sportsmole_green, <-, semithick] (visualization cs: count=38.172, y=0)--++(visualization cs: count=0, y=-0.003);
+	\draw[goal_blue, <-, semithick] (visualization cs: count=21.061, y=0)--++(visualization cs: count=0, y=-0.003);};
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,15 @@
+\documentclass[tikz]{standalone}
+\input{drawing_definitions.tex}
+\begin{document}
+\begin{tikzpicture}
+\datavisualization[scientific axes={width=10cm},
+x axis={attribute=count, label={Number of words}, logarithmic, include value={1}},
+y axis = {attribute=y, label={Frequency}, logarithmic},
+visualize as line/.list={goal, sportsmole},
+style sheet = football commentary,
+sportsmole={style={sportsmole_green},label in legend={text={sportsmole commentary}}},
+goal={style={goal_blue}, label in legend={text={goal.com commentary}}},
+legend=north east inside]
+data[read from file=word_frequency_bins.csv, format=commentcountdata];
+\end{tikzpicture}
+\end{document}
